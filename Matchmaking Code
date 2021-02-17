@@ -14,7 +14,7 @@ dic #To see the dictionary
 
 #New Jupyter notebook block
 
-#men-proposing algorithm
+#Men-proposing Gale-Shapley algorithm
 #for women-proposing, switch the 'm' in line 14 to 'w'
 
 #Keep running this until the dictionary stops changing

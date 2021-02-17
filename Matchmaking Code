@@ -1,0 +1,47 @@
+#I like to break things up into blocks in Jupyter notebook, so this should be broken up
+
+import pandas as pd
+import numpy as np
+
+file_name = "C:\\Users\\mamba\\OneDrive\\Documents\\Mamba's University\\nameoffilewithresponses.csv" 
+df = pd.read_csv(file_name, encoding='latin-1')
+
+dic = df.set_index('User').T.to_dict('list')
+
+couples = [] #initialize list of marriages
+
+dic #To see the dictionary
+
+#New Jupyter notebook block
+
+#men-proposing algorithm
+#for women-proposing, switch the 'm' in line 14 to 'w'
+
+#Keep running this until the dictionary stops changing
+for man, ranks in dic.items():
+    if man in [tup[0] for tup in couples]: #check man isn't already engaged
+        continue #go to next man if engaged
+    else:
+        if 'm' in man: #ensure it's a man
+            if not pd.isna(ranks[0]): #check man hasn't already proposed to everyone on his list
+                w = ranks[0]
+                ranks.pop(0)
+                engage = (man,w)
+                sub_cup = [tup for tup in couples if tup[1] == w]
+                if sub_cup: #check if woman is already engaged
+                    other_man = sub_cup[0][0]
+                    if man in dic[w]:
+                        if dic[w].index(other_man) > dic[w].index(man): #if man is preferred to other man
+                            couples.remove(sub_cup[0])
+                            couples.append(engage)
+                else: #unconditionally add couple if woman isn't engaged
+                    couples.append(engage)
+                if man not in dic[w]: #check if woman prefers to stay single than be with man
+                            if engage in couples:
+                                couples.remove(engage)
+                                
+dic #To see how the dictionary changed
+
+#New Jupyter notebook block
+
+couples #return list of matches

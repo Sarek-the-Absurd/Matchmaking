@@ -19,26 +19,26 @@ dic #To see the dictionary
 
 #Keep running this until the dictionary stops changing
 for man, ranks in dic.items():
-    if man in [tup[0] for tup in couples]: #check man isn't already engaged
-        continue #go to next man if engaged
-    else:
-        if 'm' in man: #ensure it's a man
-            if not pd.isna(ranks[0]): #check man hasn't already proposed to everyone on his list
-                w = ranks[0]
-                ranks.pop(0)
-                engage = (man,w)
-                sub_cup = [tup for tup in couples if tup[1] == w]
-                if sub_cup: #check if woman is already engaged
-                    other_man = sub_cup[0][0]
-                    if man in dic[w]:
-                        if dic[w].index(other_man) > dic[w].index(man): #if man is preferred to other man
-                            couples.remove(sub_cup[0])
-                            couples.append(engage)
-                else: #unconditionally add couple if woman isn't engaged
-                    couples.append(engage)
-                if man not in dic[w]: #check if woman prefers to stay single than be with man
-                            if engage in couples:
-                                couples.remove(engage)
+    if man not in [tup[0] for tup in couples] and 'm' in man: #ensure it's a man and check man isn't already engaged
+        #continue #go to next man if engaged
+    #else:
+        #if 'm' in man: #ensure it's a man
+        if not pd.isna(ranks[0]): #check man hasn't already proposed to everyone on his list
+            w = ranks[0]
+            ranks.pop(0)
+            engage = (man,w)
+            sub_cup = [tup for tup in couples if tup[1] == w]
+            if sub_cup: #check if woman is already engaged
+                other_man = sub_cup[0][0]
+                if man in dic[w]:
+                    if dic[w].index(other_man) > dic[w].index(man): #if man is preferred to other man
+                        couples.remove(sub_cup[0])
+                        couples.append(engage)
+            elif man in dic[w]: #unconditionally add couple if woman isn't engaged and woman prefers to be with man than stay single
+                couples.append(engage)
+            #if man not in dic[w]: #check if woman prefers to stay single than be with man
+            #            if engage in couples:
+            #                couples.remove(engage)
                                 
 dic #To see how the dictionary changed
 

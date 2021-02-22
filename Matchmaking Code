@@ -7,6 +7,10 @@ file_name = "C:\\Users\\mamba\\OneDrive\\Documents\\Mamba's University\\nameoffi
 df = pd.read_csv(file_name, encoding='latin-1')
 
 dic = df.set_index('User').T.to_dict('list')
+# Is "sex" a field in the original data? If so, the .loc method could be used to split this into two dictionaries, like so:
+#active_sex = 'm' # defining at the beginning aids in readability, ease of editing
+#dic_active_sex = df.loc[df["sex"] == active_sex].set_index('User').T.to_dict('list') # I don't know the exact field name, but this sort of format
+#dic_inactive_sex = df.loc[df["sex"] != active_sex].set_index('User').T.to_dict('list')
 
 couples = [] #initialize list of marriages
 
